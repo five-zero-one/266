@@ -29,7 +29,7 @@ document.addEventListener("scroll", makeActive);
 document.addEventListener("click", onClick);
 
 form.addEventListener("submit", e => { e.preventDefault(); new FormData(form); });
-form.addEventListener("formdata", _ => alert("Thank you for subscribing!"));
+form.addEventListener("formdata", ({ formData }) => alert(`Thank you ${formData.get("name")} for signing up with ${formData.get("email")}`));
 
 // Scroll to section
 
