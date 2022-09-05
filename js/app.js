@@ -15,6 +15,7 @@
 
 const sections = document.querySelectorAll("section");
 const ul = document.getElementById("navbar__list");
+const form = document.getElementById("subscribe");
 
 const VALUE = 150;
 
@@ -25,19 +26,28 @@ ul.append(...[...sections].map(createLink));
 // add event listeners
 
 document.addEventListener("scroll", makeActive);
-document.addEventListener("click", onScroll);
+document.addEventListener("click", onClick);
+
+form.addEventListener("submit", e => { e.preventDefault(); new FormData(form); });
+form.addEventListener("formdata", _ => alert("Thank you for subscribing!"));
 
 // Scroll to section
 
-function onScroll(e) {
-    e.preventDefault();
-
+function onClick(e) {
     const { target: el } = e;
+    switch (el.tagName.toLowerCase()) {
+        case "a":
+            e.preventDefault();
+            return navToSection(el);
+    }
 
-    el.tagName.toLowerCase() === "a" &&
-        document
-            .getElementById(el.dataset.section)
-            .scrollIntoView({ behavior: "smooth" });
+    console.log(e.target);
+}
+
+function navToSection(el) {
+    document
+        .getElementById(el.dataset.section)
+        .scrollIntoView({ behavior: "smooth" });
 }
 
 // Add class 'active' to section when near top of viewport
