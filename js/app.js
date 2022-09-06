@@ -40,14 +40,15 @@ function onClick(e) {
             e.preventDefault();
             return navToSection(el);
     }
-
-    console.log(e.target);
 }
 
 function navToSection(el) {
     document
         .getElementById(el.dataset.section)
         .scrollIntoView({ behavior: "smooth" });
+
+    document.getElementById("navbar__list").style.display = "none";
+    console.log(document.getElementById("navbar__list"));
 }
 
 // Add class 'active' to section when near top of viewport
